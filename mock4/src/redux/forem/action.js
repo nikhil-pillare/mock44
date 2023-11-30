@@ -6,7 +6,9 @@ import {
     ADD_QUESTION_REQUEST,
     ADD_QUESTION_SUCCESS,
     ADD_QUESTION_FAILURE,
-   
+    FETCH_ANSWERS_REQUEST,
+    FETCH_ANSWERS_SUCCESS,
+    FETCH_ANSWERS_FAILURE,
   } from './actionTypes'
 
 export const fetchQuestions = () => async (dispatch) => {
@@ -33,3 +35,14 @@ export const addQuestion = (questionData) => async (dispatch) => {
 };
 
 
+export const fetchAnswers = () => async (dispatch) => {
+  dispatch({ type: FETCH_ANSWERS_REQUEST });
+
+  try {
+    const response = await axios.get('https://redux-server-mfe8.onrender.com/answers');
+    dispatch({ type: FETCH_ANSWERS_SUCCESS, payload: response.data });
+    console.log(response.data)
+  } catch (error) {
+    dispatch({ type: FETCH_ANSWERS_FAILURE, payload: error.message });
+  }
+};

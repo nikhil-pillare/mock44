@@ -5,11 +5,14 @@ import {
     ADD_QUESTION_REQUEST,
     ADD_QUESTION_SUCCESS,
     ADD_QUESTION_FAILURE,
-   
+    FETCH_ANSWERS_REQUEST,
+    FETCH_ANSWERS_SUCCESS,
+    FETCH_ANSWERS_FAILURE,
   } from './actionTypes'
   
 
   const initialState = {
+    answer:[],
     question: [],
     isLoading: false,
     isError: false,
@@ -46,6 +49,12 @@ import {
           isLoading: false,
           isError: action.payload,
         };
+        case FETCH_ANSWERS_SUCCESS:
+          return {
+            ...state,
+            isLoading: false,
+            answer: action.payload,
+          };
   
       
   
